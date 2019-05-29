@@ -9,6 +9,22 @@
 int main(void)
 {
     // Your code here
-
+    printf("hello world!\n");
+    int x = 101;
+    int fp = fork();
+    if (fp < 0)
+    {
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    }
+    else if (fp == 0)
+    {
+        printf("x is: %d \n", x);
+        x = 102;
+    }
+    else
+    {
+        printf("hello, parent here (pid: %d) of child %d\n", (int)getpid(), fp);
+    }
     return 0;
 }
