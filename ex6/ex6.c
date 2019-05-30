@@ -21,6 +21,20 @@ and `clock_gettime()` should work just fine.
 int main()
 {
     // Your code here
-    
+    struct timespec start, stop;
+
+    clock_gettime(CLOCK_REALTIME, &start);
+
+    for (int i = 0; i < number_iter; i++)
+    {
+        write(STDOUT_FILENO, "", 0);
+    }
+
+    clock_gettime(CLOCK_REALTIME, &stop);
+
+    int dif_in_ns = (stop.tv_sec - start.tv_sec) * BILLION + (stop.tv_nsec - start.tv_nsec);
+
+    double timePerIter = dif_in_ns / (double)number_iter;
+    printf("time per system call:\n      %0.3f ns\n", timePerIter);
     return 0;
 }
